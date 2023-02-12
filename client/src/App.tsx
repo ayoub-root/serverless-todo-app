@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Link, Route, Router, Switch } from 'react-router-dom'
-import { Grid, Menu, Segment } from 'semantic-ui-react'
+import { Link, NavLink, Route, Router, Switch } from 'react-router-dom'
+import { Grid, Item, Menu, MenuMenu, Menu as Menuu, Segment } from 'semantic-ui-react'
 
 import Auth from './auth/Auth'
 import { EditTodo } from './components/EditTodo'
@@ -36,7 +36,7 @@ export default class App extends Component<AppProps, AppState> {
   render() {
     return (
       <div>
-        <Segment style={{ padding: '8em 0em' }} vertical>
+        <div style={{ padding: '8em 0em' }} vertical>
           <Grid container stackable verticalAlign="middle">
             <Grid.Row>
               <Grid.Column width={16}>
@@ -48,35 +48,35 @@ export default class App extends Component<AppProps, AppState> {
               </Grid.Column>
             </Grid.Row>
           </Grid>
-        </Segment>
+        </div>
       </div>
     )
   }
 
   generateMenu() {
-    return (
-      <Menu>
-        <Menu.Item name="home">
+    return (<Menu>
+      <MenuMenu>
+        <Item name="home">
           <Link to="/">Home</Link>
-        </Menu.Item>
+        </Item>
 
-        <Menu.Menu position="right">{this.logInLogOutButton()}</Menu.Menu>
-      </Menu>
-    )
+        <MenuMenu position="right">{this.logInLogOutButton()}</MenuMenu>
+      </MenuMenu>
+    </Menu>)
   }
 
   logInLogOutButton() {
     if (this.props.auth.isAuthenticated()) {
       return (
-        <Menu.Item name="logout" onClick={this.handleLogout}>
+        <Item name="logout" onClick={this.handleLogout}>
           Log Out
-        </Menu.Item>
+        </Item>
       )
     } else {
       return (
-        <Menu.Item name="login" onClick={this.handleLogin}>
+        <Item name="login" onClick={this.handleLogin}>
           Log In
-        </Menu.Item>
+        </Item>
       )
     }
   }
@@ -86,7 +86,7 @@ export default class App extends Component<AppProps, AppState> {
       return <LogIn auth={this.props.auth} />
     }
 
-    return (
+    return (<div>
       <Switch>
         <Route
           path="/"
@@ -104,8 +104,8 @@ export default class App extends Component<AppProps, AppState> {
           }}
         />
 
-        <Route component={NotFound} />
-      </Switch>
+        <Route render={()=><NotFound/>} />
+      </Switch></div>
     )
   }
 }
