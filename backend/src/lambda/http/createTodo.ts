@@ -14,7 +14,16 @@ export const handler = middy(
     const newTodo: CreateTodoRequest = JSON.parse(event.body)
     // TODO: Implement creating a new TODO item
   
-    
+    if(newTodo.name==""){
+      return {
+        statusCode: 401,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': true
+        },
+        body: "name should not be empty"
+      }
+    }
   const userId = getUserId(event)
 
   try {

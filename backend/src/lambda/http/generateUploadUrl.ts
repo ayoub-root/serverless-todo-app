@@ -14,7 +14,7 @@ import * as AWSXRay from 'aws-xray-sdk'
 import { getUserId } from '../utils'
  import { createLogger } from '../../utils/logger'
 import { getUserTodo, updateTodoAttachmentUrl } from '../../businessLogic/todosLogics'
-import { getUploadUrl } from '../../businessLogic/attachmentUtils'
+import { getUploadUrl } from '../../fileStorage/attachmentUtils'
 
 const logger = createLogger('generateUploadUrl')
 const XAWS = AWSXRay.captureAWS(AWS)

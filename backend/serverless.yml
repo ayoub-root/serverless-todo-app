@@ -1,7 +1,7 @@
 # TODOok: Change the name of the org 
 #org: ayoubben
-app: serverless-todo-app
-service: serverless-todo-app
+app: serverless-todo-appolo
+service: serverless-todo-appolo
 
 plugins:
   - serverless-webpack
@@ -64,7 +64,16 @@ custom:
     models:
       - name: CreateTodoRequest
         contentType: application/json
-        schema: ${file(models/create-todo-model.json)}
+        schema: #${file(models/create-todo-model.json)}
+          type: 'object'
+          properties:
+            name: 
+              type: 'string'
+            dueDate:
+              type: 'string'
+          required:
+            - name
+            - dueDate
       - name: UpdateTodoRequest
         contentType: application/json
         schema: ${file(models/update-todo-model.json)}
@@ -266,5 +275,5 @@ resources:
               Action: 's3:GetObject'
               Resource: 'arn:aws:s3:::${self:provider.environment.ATTACHMENT_S3_BUCKET}/*'
         Bucket: !Ref AttachmentsBucket
-#sls config credentials --provider aws --key AKIA6AYE44JUUXCOQHWI --secret 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 --profile serverless
+#sls config credentials --provider aws --key AKIA6AYE44JUW6CGB2HS --secret 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 --profile serverless
  
